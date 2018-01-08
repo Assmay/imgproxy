@@ -1,0 +1,36 @@
+{
+    "name": "alexgiuvara/imgproxy",
+    "description": "Laravel Service Provider that retrieves resized images from a image proxy micro-service",
+    "keywords": ["laravel","image","proxy","microservice"],
+    "homepage": "https://github.com/alexgiuvara/imgproxy",
+    "authors": [
+        {
+            "name": "Alex Giuvara",
+            "homepage": "https://github.com/alexgiuvara/imgproxy"
+        }
+    ],
+    "license" : "MIT",
+    "require-dev": {
+        "orchestra/testbench": "^3.5",
+        "phpspec/phpspec": "^4.3",
+        "karriere/phpspec-matchers": "^2.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "AlexGiuvara\\ImgProxy": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-0": {
+            "Tests": "tests/"
+        }
+    },
+    "scripts": {
+        "test": [
+            "vendor/bin/phpspec run",
+            "vendor/bin/phpunit --color=always"
+        ]
+    },
+    "require": {
+    }
+}

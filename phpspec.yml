@@ -1,0 +1,3 @@
+bootstrap: bootstrap_spec.php
+extensions:
+    Karriere\PhpSpecMatchers\Extension: ~
