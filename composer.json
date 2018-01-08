@@ -21,8 +21,8 @@
         }
     },
     "autoload-dev": {
-        "psr-0": {
-            "Tests": "tests/"
+        "psr-4": {
+            "Tests\\": "tests/"
         }
     },
     "scripts": {
