@@ -30,5 +30,12 @@
             "vendor/bin/phpspec run",
             "vendor/bin/phpunit --color=always"
         ]
+    },
+     "extra": {
+        "laravel": {
+            "providers": [
+                "AlexGiuvara\\ImgProxy\\ImgProxyServiceProvider"
+            ]
+        }
     }
 }
