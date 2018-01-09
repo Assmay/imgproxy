@@ -13,7 +13,7 @@ class ImgProxyServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../../../../tests/config/img-proxy.php' => config_path('img-proxy.php'),
+            __DIR__ . './../../../tests/config/img-proxy.php' => config_path('img-proxy.php'),
         ]);
     }
 
