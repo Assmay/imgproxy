@@ -6,7 +6,8 @@ use AlexGiuvara\ImgProxy\Exceptions\InvalidFormat;
 use Illuminate\Support\Str;
 
 /**
- * Anemic class
+ * Anemic class.
+ * Image that is going to be resized by imgproxy micro-service
  */
 class Image
 {
@@ -48,11 +49,10 @@ class Image
     protected $url;
 
     /**
-     * Shorthand to most common resize settings
+     * Init most common resize settings. Later you can update defaults
      * @param string $path
      * @param int $width
      * @param int $height
-     * @return this
      */
     public function __construct(string $path, int $width, int $height)
     {
