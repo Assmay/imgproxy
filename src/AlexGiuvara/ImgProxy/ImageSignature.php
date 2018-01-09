@@ -2,6 +2,7 @@
 
 namespace AlexGiuvara\ImgProxy;
 
+use AlexGiuvara\ImgProxy\Contracts\ImageSignatureInterface;
 use AlexGiuvara\ImgProxy\Exceptions\InvalidKey;
 use AlexGiuvara\ImgProxy\Exceptions\InvalidSalt;
 use AlexGiuvara\ImgProxy\Exceptions\MissingKey;
@@ -9,19 +10,22 @@ use AlexGiuvara\ImgProxy\Exceptions\MissingSalt;
 use AlexGiuvara\ImgProxy\Image;
 use Illuminate\Support\Str;
 
-class ImageSignature
+class ImageSignature implements ImageSignatureInterface
 {
     /**
      * @var Image
      */
-    private $pic;
+    private $img;
 
     /**
-     * @param Image $pic
+     * TODO ImageInterface
+     * @param ImageInterface $img
      */
-    public function __construct(Image $pic)
+    public function setImage($img)
     {
-        $this->pic = $pic;
+        $this->img = $img;
+
+        return $this;
     }
 
     /**
@@ -101,20 +105,20 @@ class ImageSignature
 
     public function getEncodedUrl(): string
     {
-        return rtrim(strtr(base64_encode($this->pic->getOriginalPictureUrl()), '+/', '-_'), '=');
+        return rtrim(strtr(base64_encode($this->img->getOriginalPictureUrl()), '+/', '-_'), '=');
     }
 
     public function getPath(): string
     {
         return sprintf(
             "/%s/%d/%d/%s/%d/%s.%s",
-            $this->pic->getResize(),
-            $this->pic->getWidth(),
-            $this->pic->getHeight(),
-            $this->pic->getGravity(),
-            $this->pic->getEnlarge(),
+            $this->img->getResize(),
+            $this->img->getWidth(),
+            $this->img->getHeight(),
+            $this->img->getGravity(),
+            $this->img->getEnlarge(),
             $this->getEncodedURL(),
-            $this->pic->getExtension()
+            $this->img->getExtension()
         );
     }
 }

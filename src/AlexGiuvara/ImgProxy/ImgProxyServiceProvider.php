@@ -1,6 +1,8 @@
 <?php
 namespace AlexGiuvara\ImgProxy;
 
+use AlexGiuvara\ImgProxy\Contracts\ImageSignatureInterface;
+use AlexGiuvara\ImgProxy\ImageSignature;
 use Illuminate\Support\ServiceProvider;
 
 class ImgProxyServiceProvider extends ServiceProvider
@@ -10,7 +12,9 @@ class ImgProxyServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->publishes([
+            __DIR__ . '/../../../../tests/config/img-proxy.php' => config_path('img-proxy.php'),
+        ]);
     }
 
     /**
@@ -18,6 +22,8 @@ class ImgProxyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(ImageSignatureInterface::class, function ($app) {
+            return new ImageSignature;
+        });
     }
 }

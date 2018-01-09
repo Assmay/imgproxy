@@ -9,7 +9,6 @@ use AlexGiuvara\ImgProxy\Exceptions\MissingKey;
 use AlexGiuvara\ImgProxy\Exceptions\MissingSalt;
 use AlexGiuvara\ImgProxy\Exceptions\MissingToken;
 use AlexGiuvara\ImgProxy\Image;
-use AlexGiuvara\ImgProxy\ImageSignature;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Tests\SpecMatchers;
@@ -17,45 +16,53 @@ use Tests\SpecMatchers;
 class ImageSignatureSpec extends ObjectBehavior
 {
     use SpecMatchers;
+
     /**
      * @param Image $pic
      */
-    public function let(Image $pic)
+    public function it_throws_exception_when_key_is_not_set(Image $pic)
     {
-        $this->beConstructedWith($pic);
-    }
-
-    public function it_is_initializable()
-    {
-        $this->shouldHaveType(ImageSignature::class);
-    }
-
-    public function it_throws_exception_when_key_is_not_set()
-    {
+        $this->setImage($pic);
         app('config')->set('picture.key', null);
         $this->shouldThrow(MissingKey::class)->duringGetKey();
     }
 
-    public function it_throws_exception_when_key_is_malformed()
+    /**
+     * @param Image $pic
+     */
+    public function it_throws_exception_when_key_is_malformed(Image $pic)
     {
+        $this->setImage($pic);
         app('config')->set('picture.key', 2);
         $this->shouldThrow(InvalidKey::class)->duringGetKey();
     }
 
-    public function it_throws_exception_when_salt_is_not_set()
+    /**
+     * @param Image $pic
+     */
+    public function it_throws_exception_when_salt_is_not_set(Image $pic)
     {
+        $this->setImage($pic);
         app('config')->set('picture.salt', null);
         $this->shouldThrow(MissingSalt::class)->duringGetSalt();
     }
 
-    public function it_throws_exception_when_salt_is_malformed()
+    /**
+     * @param Image $pic
+     */
+    public function it_throws_exception_when_salt_is_malformed(Image $pic)
     {
+        $this->setImage($pic);
         app('config')->set('picture.salt', 2);
         $this->shouldThrow(InvalidSalt::class)->duringGetSalt();
     }
 
-    public function it_process_binary_key()
+    /**
+     * @param Image $pic
+     */
+    public function it_process_binary_key(Image $pic)
     {
+        $this->setImage($pic);
         $hash = 'd52ee658e421b97e6582b4ae91efa5f5';
 
         app('config')->set('picture.key', $hash);
@@ -67,8 +74,9 @@ class ImageSignatureSpec extends ObjectBehavior
     /**
      * @param
      */
-    public function it_process_binary_salt()
+    public function it_process_binary_salt(Image $pic)
     {
+        $this->setImage($pic);
         $hash = 'd52ee658e421b97e6582b4ae91efa5f5';
 
         app('config')->set('picture.salt', $hash);
@@ -89,7 +97,7 @@ class ImageSignatureSpec extends ObjectBehavior
         $pic->getEnlarge()->willReturn(0);
         $pic->getExtension()->willReturn('jpg');
         $pic->getOriginalPictureUrl()->willReturn('https://www.nasa.gov/sites/default/files/images/528131main_PIA13659_full.jpg');
-        $this->beConstructedWith($pic);
+        $this->setImage($pic);
 
         app('config')->set('picture.key', 'd52ee658e421b97e6582b4ae91efa5f6');
 
@@ -105,7 +113,7 @@ class ImageSignatureSpec extends ObjectBehavior
             640,
             360
         );
-        $this->beConstructedWith($pic);
+        $this->setImage($pic);
 
         app('config')->set('picture.key', 'd52ee658e421b97e6582b4ae91efa5f6');
 
