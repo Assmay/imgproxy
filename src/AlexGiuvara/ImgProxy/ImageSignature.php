@@ -52,7 +52,7 @@ class ImageSignature implements ImageSignatureInterface
      */
     public function getKey(): string
     {
-        if (empty($key = config('picture.key'))) {
+        if (empty($key = config('img-proxy.key'))) {
             throw new MissingKey;
         }
 
@@ -67,7 +67,7 @@ class ImageSignature implements ImageSignatureInterface
      */
     public function getSalt(): string
     {
-        if (empty($salt = config('picture.salt'))) {
+        if (empty($salt = config('img-proxy.salt'))) {
             throw new MissingSalt;
         }
 

@@ -23,7 +23,7 @@ class ImageSignatureSpec extends ObjectBehavior
     public function it_throws_exception_when_key_is_not_set(Image $pic)
     {
         $this->setImage($pic);
-        app('config')->set('picture.key', null);
+        app('config')->set('img-proxy.key', null);
         $this->shouldThrow(MissingKey::class)->duringGetKey();
     }
 
@@ -33,7 +33,7 @@ class ImageSignatureSpec extends ObjectBehavior
     public function it_throws_exception_when_key_is_malformed(Image $pic)
     {
         $this->setImage($pic);
-        app('config')->set('picture.key', 2);
+        app('config')->set('img-proxy.key', 2);
         $this->shouldThrow(InvalidKey::class)->duringGetKey();
     }
 
@@ -43,7 +43,7 @@ class ImageSignatureSpec extends ObjectBehavior
     public function it_throws_exception_when_salt_is_not_set(Image $pic)
     {
         $this->setImage($pic);
-        app('config')->set('picture.salt', null);
+        app('config')->set('img-proxy.salt', null);
         $this->shouldThrow(MissingSalt::class)->duringGetSalt();
     }
 
@@ -53,7 +53,7 @@ class ImageSignatureSpec extends ObjectBehavior
     public function it_throws_exception_when_salt_is_malformed(Image $pic)
     {
         $this->setImage($pic);
-        app('config')->set('picture.salt', 2);
+        app('config')->set('img-proxy.salt', 2);
         $this->shouldThrow(InvalidSalt::class)->duringGetSalt();
     }
 
@@ -65,7 +65,7 @@ class ImageSignatureSpec extends ObjectBehavior
         $this->setImage($pic);
         $hash = 'd52ee658e421b97e6582b4ae91efa5f5';
 
-        app('config')->set('picture.key', $hash);
+        app('config')->set('img-proxy.key', $hash);
 
         $this->getBinaryKey()
             ->shouldBe(pack("H*", $hash));
@@ -79,7 +79,7 @@ class ImageSignatureSpec extends ObjectBehavior
         $this->setImage($pic);
         $hash = 'd52ee658e421b97e6582b4ae91efa5f5';
 
-        app('config')->set('picture.salt', $hash);
+        app('config')->set('img-proxy.salt', $hash);
 
         $this->getBinarySalt()
             ->shouldBe(pack("H*", $hash));
@@ -99,7 +99,7 @@ class ImageSignatureSpec extends ObjectBehavior
         $pic->getOriginalPictureUrl()->willReturn('https://www.nasa.gov/sites/default/files/images/528131main_PIA13659_full.jpg');
         $this->setImage($pic);
 
-        app('config')->set('picture.key', 'd52ee658e421b97e6582b4ae91efa5f6');
+        app('config')->set('img-proxy.key', 'd52ee658e421b97e6582b4ae91efa5f6');
 
         $this->take()->shouldBe("/BOE5kJMsj8KMQCGZH0iNLoLjeI55hep113aw7HVXNWM/fit/640/360/no/0/aHR0cHM6Ly93d3cubmFzYS5nb3Yvc2l0ZXMvZGVmYXVsdC9maWxlcy9pbWFnZXMvNTI4MTMxbWFpbl9QSUExMzY1OV9mdWxsLmpwZw.jpg");
     }
@@ -115,7 +115,7 @@ class ImageSignatureSpec extends ObjectBehavior
         );
         $this->setImage($pic);
 
-        app('config')->set('picture.key', 'd52ee658e421b97e6582b4ae91efa5f6');
+        app('config')->set('img-proxy.key', 'd52ee658e421b97e6582b4ae91efa5f6');
 
         $this->take()->shouldBe("/J_lUMTV4ZZL_uD3cRM5IiOWyiVPA_-9JarE2ckjDtYw/fit/640/360/no/0/aHR0cHM6Ly93d3cubmFzYS5nb3Yvc2l0ZXMvZGVmYXVsdC9maWxlcy9pbWFnZXMvNTI4MTMxbWFpbl9QSUExMzY1OV9mdWxsLlBORw.jpg");
     }
