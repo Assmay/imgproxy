@@ -3,17 +3,17 @@
 Laravel Service Provider for Golang ImgProxy micro-service https://evilmartians.com/chronicles/introducing-imgproxy
 
 ## Install
-- add to composer.json:
-```
-"repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/alexgiuvara/imgproxy"
-        }
-    ],
-```
+Tested with Laravel 5.5+, but could work with 5.1+ versions
+
 - `composer require alexgiuvara/imgproxy`
-- `php artisan vendor:publish --provider="AlexGiuvara\\ImgProxy\\ImgProxyServiceProvider"`
+- if you don't use auto-discovery, add the ServiceProvider to the providers array in config/app.php
+```php
+AlexGiuvara\ImgProxy\ImgProxyServiceProvider::class,
+```
+- copy the package config to your local config with the publish command:
+```php
+php artisan vendor:publish --provider="AlexGiuvara\\ImgProxy\\ImgProxyServiceProvider"
+```
 
 ## Usage
 ```php
