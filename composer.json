@@ -18,7 +18,10 @@
     "autoload": {
         "psr-0": {
             "AlexGiuvara\\ImgProxy": "src/"
-        }
+        },
+        "files": [
+            "helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
