@@ -14,6 +14,15 @@ AlexGiuvara\ImgProxy\ImgProxyServiceProvider::class,
 ```php
 php artisan vendor:publish --provider="AlexGiuvara\\ImgProxy\\ImgProxyServiceProvider"
 ```
+- env file:
+```bash
+# img-proxy.base_url
+IMGPROXY_URL=https://img-proxy-example.com
+# your img-proxy key
+IMGPROXY_KEY=943b421c9eb07c830af81030552c86009268de4e532ba2ee2eab8247c6da0881
+# your img-proxy salt
+IMGPROXY_SALT=520f986b998545b4785e0defbc4f3c1203f22de2374a3d53cb7a7fe9fea309c5
+```
 
 ## Usage
 ```php
@@ -36,15 +45,6 @@ Route::get('/img-test', function () {
 
 helper:
 ```php
-Resized: <img src="<?php echo imgProxy('https://www.nasa.gov/sites/default/files/images/528131main_PIA13659_full.jpg', 640, 360); ?>">
+imgProxy('https://www.nasa.gov/sites/default/files/images/528131main_PIA13659_full.jpg', 640, 360)
 ```
 
-env file:
-```php
-# img-proxy.base_url
-IMGPROXY_URL=https://img-proxy-example.com
-# your img-proxy key
-IMGPROXY_KEY=aaa
-# your img-proxy salt
-IMGPROXY_SALT=bbb
-```
