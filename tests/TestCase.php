@@ -29,5 +29,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
         $app['config']->set('app.key', '12345678901234567890123456789123');
         $app['config']->set('img-proxy', $config);
+        $app['config']->set('img-proxy.salt', 'd52ee658e421b97e6582b4ae91efa5f6');
+        $app['config']->set('img-proxy.key', 'd52ee658e421b97e6582b4ae91efa5f6');
     }
 }

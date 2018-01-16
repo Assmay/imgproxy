@@ -54,16 +54,18 @@ class Image
      * @param int $width
      * @param int $height
      */
-    public function __construct(string $path, int $width, int $height)
+    public function make(string $path, int $width, int $height)
     {
         $this->setOriginalPictureUrl($path)
             ->setWidth($width)
             ->setHeight($height)
             ->setResize('fit')
             ->setGravity('no')
-            ->setEnlarge(0);
+            ->setEnlarge(0)
         //convert img to extension
-        $this->setExtension('jpg');
+            ->setExtension('jpg');
+
+        return $this;
     }
 
     /**

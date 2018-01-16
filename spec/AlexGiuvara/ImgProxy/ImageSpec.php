@@ -10,10 +10,6 @@ use Prophecy\Argument;
 
 class ImageSpec extends ObjectBehavior
 {
-    public function let()
-    {
-        $this->beConstructedWith('a', 1, 1);
-    }
     public function it_is_initializable()
     {
         $this->shouldHaveType(Image::class);
@@ -102,5 +98,23 @@ class ImageSpec extends ObjectBehavior
             ->getExtension()
             ->shouldBeEqualTo('jpeg')
         ;
+    }
+
+    public function its_make_acts_as_a_shorthand()
+    {
+        $img = $this->make(
+            'https://remote.example/image.bla',
+            640,
+            360
+        );
+        $img->getOriginalPictureUrl()->shouldBe('https://remote.example/image.bla');
+        $img->getWidth()->shouldBe(640);
+        $img->getHeight()->shouldBe(360);
+        $img->getResize()->shouldBe('fit');
+        $img->getGravity()->shouldBe('no');
+        $img->getEnlarge()->shouldBe(0);
+        //default conversion .bla to .jpg
+        $img->getExtension()->shouldNotBe('bla');
+        $img->getExtension()->shouldBe('jpg');
     }
 }

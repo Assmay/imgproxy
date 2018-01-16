@@ -2,6 +2,7 @@
 namespace AlexGiuvara\ImgProxy;
 
 use AlexGiuvara\ImgProxy\Contracts\ImageSignatureInterface;
+use AlexGiuvara\ImgProxy\Image;
 use AlexGiuvara\ImgProxy\ImageSignature;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,7 +24,7 @@ class ImgProxyServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(ImageSignatureInterface::class, function ($app) {
-            return new ImageSignature;
+            return new ImageSignature($app->make(Image::class));
         });
     }
 }

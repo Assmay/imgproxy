@@ -21,11 +21,9 @@ class ImageSignature implements ImageSignatureInterface
      * TODO ImageInterface
      * @param ImageInterface $img
      */
-    public function setImage($img)
+    public function __construct($img)
     {
         $this->img = $img;
-
-        return $this;
     }
 
     /**

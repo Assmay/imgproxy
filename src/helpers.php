@@ -1,5 +1,8 @@
 <?php
 
+use AlexGiuvara\ImgProxy\Contracts\ImageSignatureInterface;
+use AlexGiuvara\ImgProxy\Image;
+
 if ( ! function_exists('imgProxy')) {
 
     /**
@@ -9,9 +12,9 @@ if ( ! function_exists('imgProxy')) {
      */
     function imgProxy(string $path, int $width, int $height): string
     {
-        $pic       = app(\AlexGiuvara\ImgProxy\Image::class, compact('path', 'width', 'height'));
-        $signature = app(\AlexGiuvara\ImgProxy\Contracts\ImageSignatureInterface::class)->setImage($pic);
+        app()->instance(Image::class, (new Image)->make($path, $width, $height));
 
-        return config('img-proxy.base_url') . $signature->take();
+        return config('img-proxy.base_url') .
+        app(ImageSignatureInterface::class)->take();
     }
 }
