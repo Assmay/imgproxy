@@ -25,14 +25,30 @@ IMGPROXY_SALT=520f986b998545b4785e0defbc4f3c1203f22de2374a3d53cb7a7fe9fea309c5
 ```
 
 ## Usage
+
+helper:
 ```php
+imgProxy('https://www.nasa.gov/sites/default/files/images/528131main_PIA13659_full.jpg', 640, 360)
+```
+
+```php
+use AlexGiuvara\ImgProxy\Contracts\ImageSignatureInterface;
+use AlexGiuvara\ImgProxy\Image;
+
 Route::get('/img-test', function () {
     $path      = 'https://www.nasa.gov/sites/default/files/images/528131main_PIA13659_full.jpg';
     $width     = 640;
     $height    = 360;
-    $pic       = app(Image::class, compact('path', 'width', 'height'));
-    //more options: $pic->setResize('fit')->setGravity('no')->setEnlarge(0)->setExtension('png');
-    $signature = app(ImageSignatureInterface::class)->setImage($pic);
+    $pic       = new Image;
+    $pic->setOriginalPictureUrl($path)
+        ->setWidth($width)
+        ->setHeight($height)
+        ->setResize('fit')
+        ->setGravity('no')
+        ->setEnlarge(0)
+        ->setExtension('png');
+    app()->instance(Image::class, $pic);
+    $signature = app(ImageSignatureInterface::class);
 
     echo '
     Resized: <img src="' . config('img-proxy.base_url') . $signature->take() . '" alt="Resized">
@@ -41,10 +57,5 @@ Route::get('/img-test', function () {
     ';
 
 });
-```
-
-helper:
-```php
-imgProxy('https://www.nasa.gov/sites/default/files/images/528131main_PIA13659_full.jpg', 640, 360)
 ```
 
