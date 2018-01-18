@@ -3,7 +3,7 @@
 use AlexGiuvara\ImgProxy\Contracts\ImageSignatureInterface;
 use AlexGiuvara\ImgProxy\Image;
 
-if ( ! function_exists('imgProxy')) {
+if (! function_exists('imgProxy')) {
 
     /**
      * @param string $path

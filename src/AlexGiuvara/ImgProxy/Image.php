@@ -76,7 +76,7 @@ class Image
     {
         $argument1 = Str::lower($argument1);
 
-        $this->resize = ( ! in_array($argument1, config('img-proxy.resize_values'), true))
+        $this->resize = (! in_array($argument1, config('img-proxy.resize_values'), true))
         ? self::DEFAULT_RESIZE
         : $argument1;
 
@@ -142,7 +142,7 @@ class Image
     public function setGravity(string $argument1 = null)
     {
         $argument1     = Str::lower($argument1);
-        $this->gravity = ( ! in_array($argument1, config('img-proxy.gravity_values')))
+        $this->gravity = (! in_array($argument1, config('img-proxy.gravity_values')))
         ? self::DEFAULT_GRAVITY
         : $argument1;
 
@@ -187,7 +187,7 @@ class Image
     {
         $argument1 = Str::lower($argument1);
 
-        if ( ! in_array($argument1, config('img-proxy.formats'))) {
+        if (! in_array($argument1, config('img-proxy.formats'))) {
             throw new InvalidFormat($argument1);
         }
 
