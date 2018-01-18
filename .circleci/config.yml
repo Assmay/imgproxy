@@ -1,0 +1,56 @@
+# PHP CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-php/ for more details
+#
+version: 2
+jobs:
+  build:
+    working_directory: /tmp/app
+
+    docker:
+      - image: circleci/php:7.2-cli-node-browsers
+        environment:
+          APP_ENV=testing
+
+    working_directory: /tmp/app
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ .Branch }}-{{ checksum "composer.json" }}
+          - v1-dependencies-{{ .Branch }}
+          - v1-dependencies
+
+      - run:
+          name: Install composer dependencies
+          command: composer install --no-interaction --no-suggest --prefer-dist
+
+      - persist_to_workspace:
+          root: /tmp
+          paths:
+            - app
+
+      - save_cache:
+          paths:
+            - ./vendor
+            - ~/.composer/cache
+          key: v1-dependencies-{{ .Branch }}-{{ checksum "composer.json" }}
+
+      - run:
+          name: Install and enable Xdebug
+          command: pecl install xdebug && docker-php-ext-enable xdebug
+
+      - run:
+          name: Run unit tests
+          command: |
+            mkdir -p ~/phpunit
+            export TERM=xterm
+            composer ci
+
+      - store_test_results:
+          path: ~/phpunit
+
+      - store_artifacts:
+          path: ./report
+
