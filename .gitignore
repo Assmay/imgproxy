@@ -4,3 +4,4 @@
 *.sublime-workspace
 *.project
 .idea/
+.php_cs.cache

@@ -7,7 +7,6 @@ use AlexGiuvara\ImgProxy\Exceptions\InvalidKey;
 use AlexGiuvara\ImgProxy\Exceptions\InvalidSalt;
 use AlexGiuvara\ImgProxy\Exceptions\MissingKey;
 use AlexGiuvara\ImgProxy\Exceptions\MissingSalt;
-use AlexGiuvara\ImgProxy\Image;
 use Illuminate\Support\Str;
 
 class ImageSignature implements ImageSignatureInterface
