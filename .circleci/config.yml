@@ -37,11 +37,11 @@ jobs:
             - ~/.composer/cache
           key: v1-dependencies-{{ .Branch }}-{{ checksum "composer.json" }}
 
-      - run:
-          name: Install and enable Xdebug
-          command: |
-            sudo pecl install xdebug
-            sudo docker-php-ext-enable xdebug
+      # - run:
+      #     name: Install and enable Xdebug
+      #     command: |
+      #       sudo pecl install xdebug
+      #       sudo docker-php-ext-enable xdebug
 
       - run:
           name: Run unit tests
