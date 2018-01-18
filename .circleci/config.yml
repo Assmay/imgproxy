@@ -39,13 +39,16 @@ jobs:
 
       - run:
           name: Install and enable Xdebug
-          command: pecl install xdebug && docker-php-ext-enable xdebug
+          command: |
+            pecl install xdebug
+            docker-php-ext-enable xdebug
 
       - run:
           name: Run unit tests
           command: |
             mkdir -p ~/phpunit
             export TERM=xterm
+            composer test
             composer ci
 
       - store_test_results:
