@@ -3,10 +3,10 @@
 Laravel Service Provider for Golang ImgProxy micro-service https://evilmartians.com/chronicles/introducing-imgproxy
 
 ## Install
-Tested with Laravel 5.5+, but could work with 5.1+ versions
+Works with Laravel 5.1, 5.2, 5.3, 5.4, 5.5 / PHP 7.0, 7.1, 7.2
 
 - `composer require alexgiuvara/imgproxy`
-- if you don't use auto-discovery, add the ServiceProvider to the providers array in config/app.php
+- copy the ServiceProvider to the providers array in config/app.php. Laravel 5.5 users with  auto-discovery may skip this step
 ```php
 AlexGiuvara\ImgProxy\ImgProxyServiceProvider::class,
 ```
