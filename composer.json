@@ -39,7 +39,10 @@
             "vendor/bin/phpspec run --format=pretty",
             "vendor/bin/phpunit --color=always"
         ],
-        "ci": "vendor/bin/phpunit --color=always --log-junit ~/phpunit/junit.xml --coverage-html ./report tests",
+        "circle-ci": [
+            "vendor/bin/phpspec run --format=pretty",
+            "vendor/bin/phpunit --color=always --log-junit ~/phpunit/junit.xml --coverage-html ./report tests"
+        ],
         "fmt": "vendor/bin/php-cs-fixer fix --diff --ansi src"
     },
      "extra": {
