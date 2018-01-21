@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/alexgiuvara/imgproxy.svg?style=shield&circle-token=6062641281699c0d10c0a5a4b8ff860c63af4ca5)](https://circleci.com/gh/alexgiuvara/imgproxy)
 # img-proxy
 
 Laravel Service Provider for Golang ImgProxy micro-service https://evilmartians.com/chronicles/introducing-imgproxy
