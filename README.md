@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/alexgiuvara/imgproxy.svg?style=shield&circle-token=6062641281699c0d10c0a5a4b8ff860c63af4ca5)](https://circleci.com/gh/alexgiuvara/imgproxy)
+[![CircleCI](https://circleci.com/gh/alexgiuvara/imgproxy.svg?style=shield&circle-token=6062641281699c0d10c0a5a4b8ff860c63af4ca5)](https://circleci.com/gh/alexgiuvara/imgproxy)[![Latest Stable Version](https://poser.pugx.org/alexgiuvara/imgproxy/v/stable)](https://packagist.org/packages/alexgiuvara/imgproxy)[![Total Downloads](https://poser.pugx.org/alexgiuvara/imgproxy/downloads)](https://packagist.org/packages/alexgiuvara/imgproxy)[![composer.lock](https://poser.pugx.org/alexgiuvara/imgproxy/composerlock)](https://packagist.org/packages/alexgiuvara/imgproxy)
 # img-proxy
 
 Laravel Service Provider for Golang ImgProxy micro-service https://evilmartians.com/chronicles/introducing-imgproxy
