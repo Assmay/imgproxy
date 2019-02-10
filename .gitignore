@@ -6,3 +6,4 @@
 .idea/
 .php_cs.cache
 report/
+composer.lock
