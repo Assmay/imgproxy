@@ -5,3 +5,4 @@
 *.project
 .idea/
 .php_cs.cache
+report/

@@ -1,10 +1,10 @@
-[![CircleCI](https://circleci.com/gh/alexgiuvara/imgproxy.svg?style=shield&circle-token=6062641281699c0d10c0a5a4b8ff860c63af4ca5)](https://circleci.com/gh/alexgiuvara/imgproxy)[![Latest Stable Version](https://poser.pugx.org/alexgiuvara/imgproxy/v/stable)](https://packagist.org/packages/alexgiuvara/imgproxy)[![Total Downloads](https://poser.pugx.org/alexgiuvara/imgproxy/downloads)](https://packagist.org/packages/alexgiuvara/imgproxy)
+[![Latest Stable Version](https://poser.pugx.org/alexgiuvara/imgproxy/v/stable)](https://packagist.org/packages/alexgiuvara/imgproxy)[![Total Downloads](https://poser.pugx.org/alexgiuvara/imgproxy/downloads)](https://packagist.org/packages/alexgiuvara/imgproxy)
 # img-proxy
 
 Laravel Service Provider for Golang ImgProxy micro-service https://evilmartians.com/chronicles/introducing-imgproxy
 
 ## Install
-Works with Laravel 5.1, 5.2, 5.3, 5.4, 5.5 / PHP 7.0, 7.1, 7.2
+Works with Laravel 5.1 - 5.7 / PHP 7.0 - 7.2, probably 7.3 too
 
 - `composer require alexgiuvara/imgproxy`
 - copy the ServiceProvider to the providers array in config/app.php. Laravel 5.5 users with  auto-discovery may skip this step
@@ -15,6 +15,9 @@ AlexGiuvara\ImgProxy\ImgProxyServiceProvider::class,
 ```php
 php artisan vendor:publish --provider="AlexGiuvara\\ImgProxy\\ImgProxyServiceProvider"
 ```
+
+- to generate the secrets, you can use this command: `echo $(xxd -g 2 -l 64 -p /dev/random | tr -d '\n')`
+
 - env file:
 ```bash
 # img-proxy.base_url
@@ -24,6 +27,8 @@ IMGPROXY_KEY=943b421c9eb07c830af81030552c86009268de4e532ba2ee2eab8247c6da0881
 # your img-proxy salt
 IMGPROXY_SALT=520f986b998545b4785e0defbc4f3c1203f22de2374a3d53cb7a7fe9fea309c5
 ```
+
+**This package does not cover** the `Authorization` header.
 
 ## Usage
 
