@@ -42,5 +42,6 @@ return [
     /**
      * The supported formats
      */
-    'formats'        => ['jpeg', 'jpg', 'png', 'gif', 'webp'],
+    'formats'        => ['.jpeg', '.jpg', '.png', '.gif', '.webp'],
+    'default_extinsion'        => false,
 ];
