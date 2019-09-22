@@ -15,6 +15,10 @@ class ImageSignature implements ImageSignatureInterface
      * @var Image
      */
     private $img;
+    /**
+     * @var int
+     */
+    private $signature_size = null;
 
     /**
      * TODO ImageInterface
@@ -22,6 +26,11 @@ class ImageSignature implements ImageSignatureInterface
      */
     public function __construct($img)
     {
+        if (env('IMGPROXY_SIGNATURE_SIZE', null)){
+            $signature_size = env('IMGPROXY_SIGNATURE_SIZE', null);
+            if (is_numeric($signature_size))
+                $this->signature_size = (int)$signature_size;
+        }
         $this->img = $img;
     }
 
@@ -33,13 +42,16 @@ class ImageSignature implements ImageSignatureInterface
     public function take(): string
     {
         $path      = $this->getPath();
-        $signature = rtrim(strtr(base64_encode(hash_hmac(
+        $signature = hash_hmac(
             'sha256',
             $this->getBinarySalt() . $path,
             $this->getBinaryKey(),
             true
-        )), '+/', '-_'), '=');
+        );
+        if ($this->signature_size)
+            $signature = pack('A'.$this->signature_size, $signature);
 
+        $signature = rtrim(strtr(base64_encode($signature), '+/', '-_'), '=');
         return sprintf("/%s%s", $signature, $path);
     }
     // below are the methods used by take()
@@ -107,15 +119,25 @@ class ImageSignature implements ImageSignatureInterface
 
     public function getPath(): string
     {
-        return sprintf(
-            "/%s/%d/%d/%s/%d/%s.%s",
-            $this->img->getResize(),
-            $this->img->getWidth(),
-            $this->img->getHeight(),
-            $this->img->getGravity(),
-            $this->img->getEnlarge(),
-            $this->getEncodedURL(),
-            $this->img->getExtension()
-        );
+        if ($this->img->getPreset()){
+            $path = sprintf(
+                "/%s/%s%s",
+                $this->img->getPreset(),
+                $this->getEncodedURL(),
+                $this->img->getExtension()
+            );
+        }else{
+            $path = sprintf(
+                "/%s/%d/%d/%s/%d/%s%s",
+                $this->img->getResize(),
+                $this->img->getWidth(),
+                $this->img->getHeight(),
+                $this->img->getGravity(),
+                $this->img->getEnlarge(),
+                $this->getEncodedURL(),
+                $this->img->getExtension()
+            );
+        }
+        return $path;
     }
 }

@@ -47,6 +47,10 @@ class Image
      * @var mixed
      */
     protected $url;
+    /**
+     * @var string
+     */
+    protected $preset;
 
     /**
      * Init most common resize settings. Later you can update defaults
@@ -54,7 +58,7 @@ class Image
      * @param int $width
      * @param int $height
      */
-    public function make(string $path, int $width, int $height)
+    public function make(string $path, int $width, int $height, $extension=null)
     {
         $this->setOriginalPictureUrl($path)
             ->setWidth($width)
@@ -63,11 +67,26 @@ class Image
             ->setGravity('no')
             ->setEnlarge(0)
         //convert img to extension
-            ->setExtension('jpg');
+            ->setExtension($extension);
+
+        return $this;
+    }
+    public function makePreset(string $path, string $preset, $extension=null)
+    {
+        $this->setOriginalPictureUrl($path)
+            ->setPreset($preset)
+            ->setExtension($extension);
 
         return $this;
     }
 
+    public function getPreset(){
+        return $this->preset;
+    }
+    public function setPreset($preset){
+        $this->preset = $preset;
+        return $this;
+    }
     /**
      * @param string $argument1
      * @return mixed
@@ -183,16 +202,21 @@ class Image
     /**
      * @param $argument1
      */
-    public function setExtension(string $argument1)
+    public function setExtension($argument1)
     {
-        $argument1 = Str::lower($argument1);
-
-        if (! in_array($argument1, config('img-proxy.formats'))) {
-            throw new InvalidFormat($argument1);
+        if (is_null($argument1)){
+            $argument1 = config('img-proxy.default_extension');
         }
+        if ($argument1 != false){
+            $argument1 = Str::lower($argument1);
 
+            if (! in_array($argument1, config('img-proxy.formats'))) {
+                throw new InvalidFormat($argument1);
+            }
+        }
+        if (!$argument1)
+            $argument1 = '';
         $this->extension = $argument1;
-
         return $this;
     }
 

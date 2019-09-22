@@ -4,13 +4,13 @@
  * A remote microservice that resizes images.
  * More info https://github.com/DarthSim/imgproxy
  */
+
 return [
     'base_url'       => env('IMGPROXY_URL'),
 
     //security
     'key'            => env('IMGPROXY_KEY'),
     'salt'           => env('IMGPROXY_SALT'),
-    'token'          => env('IMGPROXY_AUTH_TOKEN'),
 
     //possible values (just for reference)
     'resize'         => 'fit',
@@ -42,5 +42,6 @@ return [
     /**
      * The supported formats
      */
-    'formats'        => ['jpeg', 'jpg', 'png', 'gif', 'webp'],
+    'formats'        => ['.jpeg', '.jpg', '.png', '.gif', '.webp'],
+    'default_extinsion'        => false,
 ];
