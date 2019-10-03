@@ -11,6 +11,7 @@ return [
     //security
     'key'            => env('IMGPROXY_KEY'),
     'salt'           => env('IMGPROXY_SALT'),
+    'signature_size' => env('IMGPROXY_SIGNATURE_SIZE'),
 
     //possible values (just for reference)
     'resize'         => 'fit',
