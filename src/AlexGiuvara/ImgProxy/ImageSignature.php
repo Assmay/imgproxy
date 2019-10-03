@@ -26,8 +26,8 @@ class ImageSignature implements ImageSignatureInterface
      */
     public function __construct($img)
     {
-        if (env('IMGPROXY_SIGNATURE_SIZE', null)){
-            $signature_size = env('IMGPROXY_SIGNATURE_SIZE', null);
+        if (config('img-proxy.key')){
+            $signature_size = config('img-proxy.key');
             if (is_numeric($signature_size))
                 $this->signature_size = (int)$signature_size;
         }
