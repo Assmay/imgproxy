@@ -127,16 +127,7 @@ class ImageSignature implements ImageSignatureInterface
                 $this->img->getExtension()
             );
         }else{
-            $path = sprintf(
-                "/%s/%d/%d/%s/%d/%s%s",
-                $this->img->getResize(),
-                $this->img->getWidth(),
-                $this->img->getHeight(),
-                $this->img->getGravity(),
-                $this->img->getEnlarge(),
-                $this->getEncodedURL(),
-                $this->img->getExtension()
-            );
+            $path = "/rs:{$this->img->getResize()}:{$this->img->getWidth()}:{$this->img->getHeight()}:{$this->img->getEnlarge()}/g:{$this->img->getGravity()}/{$this->getEncodedURL()}{$this->img->getExtension()}";
         }
         return $path;
     }
